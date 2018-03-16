@@ -407,17 +407,6 @@ static void ble_stack_init(void)
 }
 
 
-/*	t_callback()
-Do something when timer calls us back.
-*/
-static void t_callback(void *context)
-{
-	/* no nothing, but make SURE compiler doesn't elide us */
-	asm volatile ( "" : : "r" (context) : "memory" );
-}
-
-
-
 /*	main()
 */
 int main(void)
@@ -445,15 +434,6 @@ int main(void)
 
 	/* start PWM */
 	pwm_init();
-
-	/* set up callback */
-	APP_TIMER_DEF(callback_timer);
-	APP_ERROR_CHECK(
-		app_timer_create(&callback_timer, APP_TIMER_MODE_REPEATED, t_callback)
-		);
-	APP_ERROR_CHECK(
-		app_timer_start(callback_timer, APP_TIMER_TICKS(5), NULL)
-	);
 
 	/* start advertisng */
 	APP_ERROR_CHECK(
