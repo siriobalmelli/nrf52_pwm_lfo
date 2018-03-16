@@ -73,9 +73,11 @@ BLD := ./build
 
 .PHONY: all
 all : toolchain $(BLD)/out.hex | doc
-.PHONY: patterns
-patterns: PATTERNS =./patterns.hex
-patterns: all
+
+.PHONY: nolfo
+nolfo: CFLAGS += -DNO_ADVERT -DNO_SCAN
+nolfo: all
+
 
 .PHONY: clean
 clean :

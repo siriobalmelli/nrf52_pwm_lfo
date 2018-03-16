@@ -435,7 +435,7 @@ int main(void)
 	/* start PWM */
 	pwm_init();
 
-#if 0
+#ifndef NO_ADVERT
 	/* start advertising */
 	APP_ERROR_CHECK(
 		sd_ble_gap_adv_start(&m_adv_params, APP_BLE_CONN_CFG_TAG)
@@ -443,6 +443,8 @@ int main(void)
 #else
 	UNUSED_VARIABLE(m_adv_params);
 #endif
+
+#ifndef NO_SCAN
 	/* scan for other devices */
 	static ble_gap_scan_params_t scan_params = {
 		.active = 0,
@@ -455,6 +457,7 @@ int main(void)
 	APP_ERROR_CHECK(
 		sd_ble_gap_scan_start(&scan_params)
 		);
+#endif
 
 	/* event loop */
 	NRF_LOG_INFO("running");
