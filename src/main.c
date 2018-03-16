@@ -440,6 +440,8 @@ int main(void)
 	APP_ERROR_CHECK(
 		sd_ble_gap_adv_start(&m_adv_params, APP_BLE_CONN_CFG_TAG)
 		);
+#else
+	UNUSED_VARIABLE(m_adv_params);
 #endif
 	/* scan for other devices */
 	static ble_gap_scan_params_t scan_params = {
