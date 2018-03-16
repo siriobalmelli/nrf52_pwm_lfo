@@ -74,11 +74,6 @@ BLD := ./build
 .PHONY: all
 all : toolchain $(BLD)/out.hex | doc
 
-.PHONY: nolfo
-nolfo: CFLAGS += -DNO_ADVERT -DNO_SCAN
-nolfo: all
-
-
 .PHONY: clean
 clean :
 	rm -rf $(BLD) cscope*
@@ -94,6 +89,17 @@ doc : $(OBJ)
 	if which cscope >/dev/null; then \
 		cscope -b -q -U -k $(addprefix -I ,$(SOFT_INCL) $(SDK_INCL) $(INCL)) $(BLD)/*.c; \
 	fi
+
+# show LFO bug with different builds
+.PHONY: nolfo
+nolfo: CFLAGS += -DNO_ADVERT -DNO_SCAN
+nolfo: clean all
+.PHONY: nolfo-scan
+nolfo-scan: CFLAGS += -DNO_SCAN
+nolfo-scan: clean all
+.PHONY: nolfo-adv
+nolfo-adv: CFLAGS += -DNO_ADVERT
+nolfo-adv: clean all
 
 
 
