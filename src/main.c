@@ -50,7 +50,11 @@ PWM will output these 4 ports simultaneously.
 #define OUT_PWMd	20 /* aka: LED4 */
 
 
+/* Is jitter alleviated by telling PWM to iterate over a large buffer?
+	Apparently, not.
 #define MANY_REP
+*/
+
 
 /*
 	PWM
@@ -112,7 +116,6 @@ static nrf_drv_pwm_config_t	pwm0_conf = {
 */
 void pwm_init()
 {
-
 	nrf_gpio_cfg_output(OUT_PWMa);
 	nrf_gpio_cfg_output(OUT_PWMb);
 	nrf_gpio_cfg_output(OUT_PWMc);
