@@ -15,27 +15,52 @@ It exists to:
 This project also does double duty as a toolchain demonstration
 	for building nRF52 projects with `gcc` and `make`.
 
-The build requires some basic UNIX tools (GNU make, curl, etc),
-	and will attempt to download a complete toolchain (compiler, SDK, etc)
-	into the [./util](./util) subdirectory.
+### How to build
 
-You will however need to separately download the
-	[JLink utilities from Segger](https://www.segger.com/downloads/jlink/)
-	in order to flash the board during the `make install` phase.
+The build requires some basic UNIX tools; on a Ubuntu machine this looks like:
 
-See [./Makefile](./Makefile) for details.
+```bash
+sudo apt-get install make curl unzip tar
+```
 
-### build notes
+Once you have those, proceed with:
+
+```bash
+git clone https://github.com/siriobalmelli/nrf52_pwm_lfo.git
+cd nrf52_pwm_lfo
+make
+```
+
+You will see that `make` will download a complete toolchain
+	(compiler, SDK, etc) into the [./util](./util) subdirectory
+	of the project.
+
+Before you can install the firmware on a device, however, you need to separately
+	download the proprietary [JLink utilities from Segger](https://www.segger.com/downloads/jlink/).
+You can verify these are installed with:
+
+```bash
+which JLinkExe
+```
+
+Once that's sorted, plug an nRF52-DK into a USB port and flash the firmware with:
+
+```bash
+make install
+```
+
+### build system notes
 
 - The specific development board in use is
 	[PCA10040](https://www.keil.com/boards2/nordicsemiconductors/nrf52pca10040/).
-- This should work on macOS and Linux, but was only tested on the former.
 - The author uses [Vim](https://www.vim.org/), the toolchain is geared to this.
 - The [.ycm_extra_conf.py](.ycm_extra_conf.py) file allows for autocompletion
 	in Vim using [YouCompleteMe](https://github.com/Valloric/YouCompleteMe);
 	it's not perfect but goes a long way.
 - The build system generates [cscope](http://cscope.sourceforge.net/) definitions;
 	these are very useful when used with <https://github.com/vim-scripts/autoload_cscope.vim>.
+
+See [./Makefile](./Makefile) for details.
 
 ## A Bug
 
