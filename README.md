@@ -17,7 +17,7 @@ This project also does double duty as a toolchain demonstration
 
 The build requires some basic UNIX tools (GNU make, curl, etc),
 	and will attempt to download a complete toolchain (compiler, SDK, etc)
-	into the [./util][] subdirectory.
+	into the [./util](./util) subdirectory.
 
 You will however need to separately download the
 	[JLink utilities from Segger](https://www.segger.com/downloads/jlink/)
@@ -49,6 +49,8 @@ This bug may possibly reside in:
 - nRF52 14.2.0 SDK
 
 Bug details are in the [companion thread in Nordic's DevZone](https://devzone.nordicsemi.com/f/nordic-q-a/32389/sd_ble_gap_scan_start-induces-lfo-jitter-instability-in-pwm-output).
+
+Visual demonstration: a [video of scope reading on the GPIO](https://youtu.be/AUccm7ITvBA)
 
 ### Reproduction
 
